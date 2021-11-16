@@ -45,53 +45,88 @@
         imprimePlantas // Recorrerá el edificio e imprimirá todos los propietarios de cada puerta.
 
     </p>
-
+    <div id="ejecucion"></div>
 
     <script>
-        //1- definir contructor y métodos
-        //dudas: ¿como debe ser el constructor? ¿planta es otro objeto? 
-        //{Contructores:
+        
+        //1- definir contructor y métodos 
+        //Contructor:
         function edificio(calle, numero, cp) {
             //Atributos:
             this.calle = calle;
             this.numero = numero;
             this.cp = cp;            
-
-            /*this.numPlantas = agregarPlantasYPuertas.numPlantas;
-            this.puertas = puertas
-            this.nombre =
-                //var planta = [];//array que contiene en cada posicion una puerta*/
-                //Métodos:
+            //Métodos:
+            this.imprimir = function(cadena){
+                document.getElementById("ejecucion").innerHTML+=cadena+"<br/>";
+            }
+            
+            this.imprimir("Construido nuevo edificio en calle: "+this.calle+", no: "+this.numero+", CP: "+this.cp);
+           
+            
             this.agregarPlantasYPuertas = function (numPlantas, puertas) {
                 this.puertas = puertas;
-                this.plantas = new Array(numPlantas);
-
+                this.plantas = new Array(numPlantas);//para almacenar las plantas uso como estructura un array
+                    //aqui empiezo a iterar primero por plantas y luego por puertas
                     for (i=0;i<numPlantas;i++){
-                        this.plantas[i]=new Array (puertas);
+                        this.plantas[i]=new Array (puertas);//para almacenar las puertas uso como estructura un array
                         for(j=0;j<puertas;j++){
-                            this.plantas[i][j]={};//creacion del objeto propietario
+                            this.plantas[i][j]={};//creacion del objeto propietario {} que es la estructura que almacena los datos de cada propietario
                             this.plantas[i][j].numero=j+1;
-
                             //this.plantas[i][j]={numero: 3};
-                        }
-                        
+                        }   
                     }
-                
                 };
-            this.agregarPropietario = function (nombre, planta, puerta) {
-                
-                var puertas = this.plantas[planta-1];
-                var propietario = puertas[puerta-1];
-                propietario.nombre=nombre;
-
-                // var propietario = this.plantas[planta][puerta];
-                // propietario.nombre = nombre
-
+            
+            this.modificarNumero = function (num){
+                this.numero=num;
             }
 
+            this.modificarCalle = function(calle){
+                this.calle=calle;
+            }
 
+            this.modificarCodigoPostal = function(codigo){
+                this.cp= codigo;
+            }
 
+            this.imprimeCalle = function(){
+                this.imprimir(this.calle);
+            }
+            
+            this.imprimeNumero = function(){
+                this.imprimir(this.numero);
+            }
 
+            this.imprimeCodigoPostal = function(){
+                this.imprimir(this.cp);
+            }
+
+            this.agregarPropietario = function (nombre, planta, puerta) {
+                
+                var puertas = this.plantas[planta-1];//pongo puerta -1 porque cuando itero entre plantes y puertas el indice es 0
+                var propietario = puertas[puerta-1];
+                propietario.nombre=nombre;
+                // var propietario = this.plantas[planta][puerta];
+                // propietario.nombre = nombre
+            }
+
+            this.imprimePlantas = function(){
+
+                    //aqui empiezo a iterar primero por plantas y luego por puertas
+                    for (i=0;i<this.plantas.length;i++){
+                        //console.log("estoy iterando sobre la planta :"+i);
+                        for(j=0;j<this.puertas;j++){
+                            var nombre = this.plantas[i][j].nombre;
+                            if(nombre == undefined){
+                                nombre="VACÍO";
+                            }
+                            this.imprimir("Propietario del piso "+(j+1)+" de la planta "+(i+1)+":"+nombre);
+                            
+                        }   
+                    }
+            };
+            
         }
 
 
