@@ -10,41 +10,31 @@
 </head>
 
 <body>
-    <p>Queremos hacer una aplicación en JavaScript para
+    <h1>ACTIVIDAD INDIVIDUAL: JavaScript Objetos</h1>
+    <h2>Ronald García Guerrero</h2>
+    <h2>Enunciado:</h2>
+    <p>
+        Queremos hacer una aplicación en JavaScript para
         gestionar edificios con la información de la
         situación del edificio y de los propietarios de cada piso. Para ello queremos almacenar la siguiente información
-        de cada edificio:
-        calle.
-        número.
-        código postal.
-        plantas del edificio (dentro de cada planta tendremos un número de puertas y para cada puerta almacenaremos el
-        nombre del propietario).
-        Se pide:
+        de cada edificio:<br/>
+        Calle, número, código postal, plantas del edificio (dentro de cada planta tendremos un número de puertas y para cada puerta almacenaremos el nombre del propietario).<br/>
+        Se pide:<br/>
         Crear un objeto que nos permita instanciar edificios. Cada vez que instanciemos un edificio le pasaremos la
-        calle, número y código postal como parámetros. Se pide además crear los siguientes métodos para el objeto
-        Edificio:
-
+        calle, número y código postal como parámetros. Se pide además crear los siguientes métodos para el objeto Edificio:<br/>
         agregarPlantasYPuertas(numplantas, puertas) // Se le pasa el número de plantas que queremos crear en el piso y
         el número de puertas por planta. Cada vez que se llame a este método, añadirá el número de plantas y puertas
-        indicadas en los parámetros, a las que ya están creadas en el edificio.
-
-        modificarNumero(numero) // Se le pasa el nuevo número del edificio para que lo actualice.
-
-        modificarCalle(calle) // Se le pasa el nuevo nombre de la calle para que lo actualice.
-
-        modificarCodigoPostal(codigo) // Se le pasa el nuevo número de código postal del edificio.
-
-        imprimeCalle // Devuelve el nombre de la calle del edificio.
-
-        imprimeNumero // Devuelve el número del edificio.
-        imprimeCodigoPostal // Devuelve el código postal del edificio.
-
-        agregarPropietario(nombre,planta,puerta) // Se le pasa un nombre de propietario, un número de planta y un número
-        de puerta y lo asignará como propietario de ese piso.
-
-        imprimePlantas // Recorrerá el edificio e imprimirá todos los propietarios de cada puerta.
-
+        indicadas en los parámetros, a las que ya están creadas en el edificio.<br/>
+        modificarNumero(numero) // Se le pasa el nuevo número del edificio para que lo actualice.<br/>
+        modificarCalle(calle) // Se le pasa el nuevo nombre de la calle para que lo actualice.<br/>
+        modificarCodigoPostal(codigo) // Se le pasa el nuevo número de código postal del edificio.<br/>
+        imprimeCalle // Devuelve el nombre de la calle del edificio.<br/>
+        imprimeNumero // Devuelve el número del edificio.<br/>
+        imprimeCodigoPostal // Devuelve el código postal del edificio.<br/>
+        agregarPropietario(nombre,planta,puerta) // Se le pasa un nombre de propietario, un número de planta y un número de puerta y lo asignará como propietario de ese piso.<br/>
+        imprimePlantas // Recorrerá el edificio e imprimirá todos los propietarios de cada puerta.<br/>
     </p>
+    <h2>Ejemplo de ejecución:</h2>
     <div id="ejecucion"></div>
 
     <script>
@@ -57,8 +47,9 @@
             this.numero = numero;
             this.cp = cp;            
             //Métodos:
+            
             this.imprimir = function(cadena){
-                document.getElementById("ejecucion").innerHTML+=cadena+"<br/>";
+                document.getElementById("ejecucion").innerHTML+=cadena+"<br/>";//método creado para imprimir todo lo necesario por pantalla
             }
             
             this.imprimir("Construido nuevo edificio en calle: "+this.calle+", no: "+this.numero+", CP: "+this.cp);
@@ -68,15 +59,15 @@
                 this.puertas = puertas;
                 this.plantas = new Array(numPlantas);//para almacenar las plantas uso como estructura un array
                     //aqui empiezo a iterar primero por plantas y luego por puertas
-                    for (i=0;i<numPlantas;i++){
-                        this.plantas[i]=new Array (puertas);//para almacenar las puertas uso como estructura un array
-                        for(j=0;j<puertas;j++){
-                            this.plantas[i][j]={};//creacion del objeto propietario {} que es la estructura que almacena los datos de cada propietario
-                            this.plantas[i][j].numero=j+1;
-                            //this.plantas[i][j]={numero: 3};
-                        }   
-                    }
-                };
+                for (i=0;i<numPlantas;i++){
+                    this.plantas[i]=new Array (puertas);//para almacenar las puertas uso como estructura un array
+                    for(j=0;j<puertas;j++){
+                        this.plantas[i][j]={};//creacion del objeto propietario {} que es la estructura que almacena los datos de cada propietario
+                        this.plantas[i][j].numero=j+1;
+                        //this.plantas[i][j]={numero: 3};
+                    }   
+                }
+            }
             
             this.modificarNumero = function (num){
                 this.numero=num;
@@ -91,15 +82,22 @@
             }
 
             this.imprimeCalle = function(){
-                this.imprimir(this.calle);
+                var a = this.calle;
+                return a;
             }
             
             this.imprimeNumero = function(){
-                this.imprimir(this.numero);
+                var a = this.numero;
+                return a;
             }
 
             this.imprimeCodigoPostal = function(){
-                this.imprimir(this.cp);
+                //var a = this.imprimir(this.cp); esto no funcionó
+                //return a;
+                //this.imprimir(this.cp);esto tampoco funcionó
+                //this.cp; tampoco
+                var a = this.cp;
+                return a;
             }
 
             this.agregarPropietario = function (nombre, planta, puerta) {
@@ -109,6 +107,7 @@
                 propietario.nombre=nombre;
                 // var propietario = this.plantas[planta][puerta];
                 // propietario.nombre = nombre
+                this.imprimir(nombre+" es ahora el propietario de la puerta "+puerta+" planta "+planta);
             }
 
             this.imprimePlantas = function(){
@@ -121,15 +120,53 @@
                             if(nombre == undefined){
                                 nombre="VACÍO";
                             }
-                            this.imprimir("Propietario del piso "+(j+1)+" de la planta "+(i+1)+":"+nombre);
+                            this.imprimir("Propietario del piso "+(j+1)+" de la planta "+(i+1)+":"+nombre)+"<br/>";
                             
                         }   
                     }
-            };
+            }
             
         }
 
+        var edificioA = new edificio("Garcia Prieto", 58, "15706");
+        var edificioB = new edificio("Camino Caneiro", 29, "32004");
+        var edificioC = new edificio("Garcia Prieto", "s/n", "15705");
 
+        document.getElementById("ejecucion").innerHTML+="El código postal del edificio A es: "+edificioA.imprimeCodigoPostal()+"<br/>";
+
+        document.getElementById("ejecucion").innerHTML+="La calle del edificio C es: "+edificioC.imprimeCalle()+"<br/>";
+
+        document.getElementById("ejecucion").innerHTML+="El edificio B esta situado en "+edificioB.imprimeCalle()+" número "+edificioB.imprimeNumero()+"<br/>";
+
+        // Agregamos 2 plantas y 3 puertas por planta al edificio A...
+        // Agregamos 4 propietarios al edificio A...
+
+        edificioA.agregarPlantasYPuertas(2,3);
+
+        edificioA.agregarPropietario("Jose Antonio Lopez",1,1);
+        edificioA.agregarPropietario("Luisa Martinez",1,2);
+        edificioA.agregarPropietario("Marta Castellon",1,3);
+        edificioA.agregarPropietario("Antonio Pereira",2,2);
+
+        //Imprimir propietarios del edificio
+
+        document.getElementById("ejecucion").innerHTML+="<b>Listado de propietarios del edificio "+edificioB.imprimeCalle()+" número "+edificioB.imprimeNumero()+"</b><br/>";
+
+        edificioA.imprimePlantas();        
+        //Agregamos 1 planta más al edificio A...
+        //Agregamos 1 propietario más al edificio A planta 3, puerta 2...
+        edificioA.agregarPlantasYPuertas(3,3)
+        edificioA.agregarPropietario("Jose Antonio Lopez",1,1);
+        edificioA.agregarPropietario("Luisa Martinez",1,2);
+        edificioA.agregarPropietario("Marta Castellon",1,3);
+        edificioA.agregarPropietario("Antonio Pereira",2,2);
+        edificioA.agregarPropietario("Pedro Meijide",3,2);
+        document.getElementById("ejecucion").innerHTML+="<b>Listado de propietarios del edificio "+edificioB.imprimeCalle()+" número "+edificioB.imprimeNumero()+"</b><br/>";
+
+        edificioA.imprimePlantas();
+        
+        
+        //Borrador del código:
         /*let a = new Edificio("Industria", 45, "08026") 
         {
             calle: "Industria",
@@ -170,6 +207,7 @@
         }*/
 
     </script>
+
 
 </body>
 
